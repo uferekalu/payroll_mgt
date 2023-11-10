@@ -22,6 +22,18 @@ $borderRadius: 6px;
 // header height
 $headerHeight: 85px;
 
+// width
+$width: 100%;
+
+// sidebar width
+$sidebarWidth: 20%;
+
+// main content width
+$mainWidth: 80%;
+
+// height
+$height: 100%;
+
 @mixin breakpoint($point) {
     @if $point == md {
         // 768px

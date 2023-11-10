@@ -80,6 +80,16 @@
         font-size: 11px;
       }
     }
+    &__iconholder {
+      display: flex;
+      justify-content: center;
+      margin-left: -3px;
+      align-items: center;
+      width: 40px;
+      background: #4baa79;
+      border-top-right-radius: $borderRadius;
+      border-bottom-right-radius: $borderRadius;
+    }
   }
   &__notpayroll__holder {
     display: flex;

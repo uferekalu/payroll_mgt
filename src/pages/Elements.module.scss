@@ -1,0 +1,13 @@
+@import './../styles/variables.scss';
+
+.elements {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+
+  &__sidebar {
+    width: 244px;
+    background: $light;
+    height: fit-content;
+  }
+}
