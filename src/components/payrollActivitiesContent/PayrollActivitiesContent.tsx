@@ -11,13 +11,27 @@ const payrollActivitiesData = [
   'Payroll Approval',
 ];
 
-interface IPayrollAct {}
+interface IPayrollAct {
+  payrollActivities: boolean;
+}
 
-const PayrollActivitiesContent: React.FC<IPayrollAct> = () => {
+const PayrollActivitiesContent: React.FC<IPayrollAct> = ({
+  payrollActivities,
+}) => {
   return (
     <div className={classes.payroll_activities}>
       {payrollActivitiesData.map((payroll, idx) => (
-        <span className={classes.payroll_activities__content} key={idx}>{payroll}</span>
+        <span
+          className={
+            payrollActivities
+              ? `${classes.payroll_activities__content}
+        ${classes.payroll_activities__content__extra}`
+              : `${classes.payroll_activities__content}`
+          }
+          key={idx}
+        >
+          {payroll}
+        </span>
       ))}
     </div>
   );

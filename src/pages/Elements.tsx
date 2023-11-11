@@ -1,16 +1,96 @@
-import React from 'react';
-import classes from './Elements.module.scss'
+import React, { useState } from 'react';
+import classes from './Elements.module.scss';
 import Sidebar from '../components/sidebar/Sidebar';
+import MobileSidebar from '../components/sidebar/MobileSidebar';
+import { AiOutlineClose } from 'react-icons/ai';
 
-interface IElements {}
+interface IElements {
+  openSwitchModule: boolean;
+  setOpenSwitchModule: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedModule: string | null;
+  setSelectedModule: React.Dispatch<React.SetStateAction<string | null>>;
+  payrollActivities: boolean;
+  setPayrollActivities: React.Dispatch<React.SetStateAction<boolean>>;
+  elementSetup: boolean;
+  setElementSetup: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleElementSetup: () => void;
+  togglePayrollActivities: () => void;
+  handleSelectedModule: (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => void;
+  handleOpenSwitchModule: () => void;
+}
 
-const Elements: React.FC<IElements> = () => {
+const Elements: React.FC<IElements> = ({
+  openSwitchModule,
+  setOpenSwitchModule,
+  selectedModule,
+  setSelectedModule,
+  payrollActivities,
+  setPayrollActivities,
+  elementSetup,
+  setElementSetup,
+  toggleElementSetup,
+  togglePayrollActivities,
+  handleSelectedModule,
+  handleOpenSwitchModule,
+}) => {
+  const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false);
+
+  const toggleMobileShowSidebar = () => {
+    setShowMobileSidebar((prevState) => !prevState);
+  };
+
   return (
     <div className={classes.elements}>
-      <div className={classes.elements__sidebar}>
-        <Sidebar />
+      <div className={classes.elements__showsidebar}>
+        {showMobileSidebar ? (
+          <AiOutlineClose onClick={toggleMobileShowSidebar} />
+        ) : (
+          <i className="bi bi-list" onClick={toggleMobileShowSidebar}></i>
+        )}
       </div>
-      <div>Main</div>
+
+      {showMobileSidebar && (
+        <div className={classes.mobileSidebar}>
+          <MobileSidebar
+            openSwitchModule={openSwitchModule}
+            setOpenSwitchModule={setOpenSwitchModule}
+            selectedModule={selectedModule}
+            setSelectedModule={setSelectedModule}
+            payrollActivities={payrollActivities}
+            setPayrollActivities={setPayrollActivities}
+            elementSetup={elementSetup}
+            setElementSetup={setElementSetup}
+            toggleElementSetup={toggleElementSetup}
+            togglePayrollActivities={togglePayrollActivities}
+            handleSelectedModule={handleSelectedModule}
+            handleOpenSwitchModule={handleOpenSwitchModule}
+          />
+        </div>
+      )}
+
+      <div className={classes.elements__sidebar}>
+        <Sidebar
+          openSwitchModule={openSwitchModule}
+          setOpenSwitchModule={setOpenSwitchModule}
+          selectedModule={selectedModule}
+          setSelectedModule={setSelectedModule}
+          payrollActivities={payrollActivities}
+          setPayrollActivities={setPayrollActivities}
+          elementSetup={elementSetup}
+          setElementSetup={setElementSetup}
+          toggleElementSetup={toggleElementSetup}
+          togglePayrollActivities={togglePayrollActivities}
+          handleSelectedModule={handleSelectedModule}
+          handleOpenSwitchModule={handleOpenSwitchModule}
+        />
+      </div>
+      <div className={classes.elements__main}>
+        Main MainMainMainMainMain Main Main Main Main Main Main Main Main Main
+        Main Main Main Main Main Main Main Main Main Main Main Main Main Main
+        Main Main Main Main Main{' '}
+      </div>
     </div>
   );
 };
