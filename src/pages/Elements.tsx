@@ -3,6 +3,7 @@ import classes from './Elements.module.scss';
 import Sidebar from '../components/sidebar/Sidebar';
 import MobileSidebar from '../components/sidebar/MobileSidebar';
 import { AiOutlineClose } from 'react-icons/ai';
+import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 
 interface IElements {
   openSwitchModule: boolean;
@@ -87,9 +88,7 @@ const Elements: React.FC<IElements> = ({
         />
       </div>
       <div className={classes.elements__main}>
-        Main MainMainMainMainMain Main Main Main Main Main Main Main Main Main
-        Main Main Main Main Main Main Main Main Main Main Main Main Main Main
-        Main Main Main Main Main{' '}
+        <Breadcrumb />
       </div>
     </div>
   );

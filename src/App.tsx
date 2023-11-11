@@ -52,6 +52,25 @@ function App() {
             />
           }
         />
+        <Route
+          path="/elements"
+          element={
+            <Elements
+              openSwitchModule={openSwitchModule}
+              setOpenSwitchModule={setOpenSwitchModule}
+              selectedModule={selectedModule}
+              setSelectedModule={setSelectedModule}
+              payrollActivities={payrollActivities}
+              setPayrollActivities={setPayrollActivities}
+              elementSetup={elementSetup}
+              setElementSetup={setElementSetup}
+              toggleElementSetup={toggleElementSetup}
+              togglePayrollActivities={togglePayrollActivities}
+              handleSelectedModule={handleSelectedModule}
+              handleOpenSwitchModule={handleOpenSwitchModule}
+            />
+          }
+        />
         <Route path="/element-links" element={<ElementLinks />} />
       </Routes>
     </Layout>

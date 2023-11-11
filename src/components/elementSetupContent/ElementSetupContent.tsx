@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './ElementSetupContent.module.scss';
+import { Link } from 'react-router-dom';
 
 const elementSetupData = ['Elements', 'Balances'];
 
@@ -9,7 +10,8 @@ const ElementSetupContent: React.FC<IElementSetup> = () => {
   return (
     <div className={classes.element__setup}>
       {elementSetupData.map((ele, idx) => (
-        <span
+        <Link
+          to={ele === 'Elements' ? '/elements' : ''}
           key={idx}
           className={
             ele === 'Elements'
@@ -18,7 +20,7 @@ const ElementSetupContent: React.FC<IElementSetup> = () => {
           }
         >
           {ele}
-        </span>
+        </Link>
       ))}
     </div>
   );

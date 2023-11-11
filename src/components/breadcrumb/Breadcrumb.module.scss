@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.breadcrum {
+  display: flex;
+  gap: 10px;
+
+  &__holder {
+    display: flex;
+    gap: 10px;
+    
+    &__link {
+      font-size: 13px;
+      color: $lightText;
+      text-decoration: none;
+    }
+
+    &__arrow {
+      width: 19px;
+      height: 19px;
+    }
+  }
+}
