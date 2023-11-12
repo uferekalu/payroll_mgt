@@ -5,12 +5,12 @@ import Elements from './pages/Elements';
 import ElementLinks from './pages/ElementsLinks';
 
 function App() {
-  const [openSwitchModule, setOpenSwitchModule] = useState<boolean>(false);
+  const [openSwitchModule, setOpenSwitchModule] = useState<boolean>(true);
   const [selectedModule, setSelectedModule] = useState<string | null>(
     'Payroll Management',
   );
-  const [payrollActivities, setPayrollActivities] = useState<boolean>(false);
-  const [elementSetup, setElementSetup] = useState<boolean>(false);
+  const [payrollActivities, setPayrollActivities] = useState<boolean>(true);
+  const [elementSetup, setElementSetup] = useState<boolean>(true);
 
   const toggleElementSetup = () => {
     setElementSetup((prevState) => !prevState);

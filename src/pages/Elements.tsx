@@ -4,6 +4,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import MobileSidebar from '../components/sidebar/MobileSidebar';
 import { AiOutlineClose } from 'react-icons/ai';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
+import NoElement from '../components/noElement/NoElement';
 
 interface IElements {
   openSwitchModule: boolean;
@@ -89,6 +90,7 @@ const Elements: React.FC<IElements> = ({
       </div>
       <div className={classes.elements__main}>
         <Breadcrumb />
+        <NoElement />
       </div>
     </div>
   );

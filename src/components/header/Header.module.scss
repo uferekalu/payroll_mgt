@@ -79,6 +79,10 @@
       &::placeholder {
         font-size: 11px;
       }
+
+      @media (max-width: 400px) {
+        width: 190px;
+      }
     }
     &__iconholder {
       display: flex;

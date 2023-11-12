@@ -24,7 +24,7 @@ const Header: React.FC<IHeader> = () => {
         </div>
         <div className={classes.header__content}>
           <ChangeOrg />
-          <SearchBar />
+          <SearchBar placeholderText='Search for anything...' />
           <div className={classes.header__notpayroll__holder}>
             <img
               src={notification}
@@ -62,7 +62,7 @@ const Header: React.FC<IHeader> = () => {
         >
           <div className={classes.header__mobile__content}>
             <ChangeOrg />
-            <SearchBar />
+            <SearchBar placeholderText='Search for anything...'  />
           </div>
         </div>
         <div className={classes.header__mobile__content__toggle}>
