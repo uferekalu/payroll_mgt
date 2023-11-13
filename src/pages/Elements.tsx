@@ -5,6 +5,7 @@ import MobileSidebar from '../components/sidebar/MobileSidebar';
 import { AiOutlineClose } from 'react-icons/ai';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import NoElement from '../components/noElement/NoElement';
+import CreateElementModal from '../components/createElementModal/CreateElementModal';
 
 interface IElements {
   openSwitchModule: boolean;
@@ -38,6 +39,7 @@ const Elements: React.FC<IElements> = ({
   handleOpenSwitchModule,
 }) => {
   const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false);
+  const [createElement, setCreateElement] = useState<boolean>(false)
 
   const toggleMobileShowSidebar = () => {
     setShowMobileSidebar((prevState) => !prevState);
@@ -90,8 +92,12 @@ const Elements: React.FC<IElements> = ({
       </div>
       <div className={classes.elements__main}>
         <Breadcrumb />
-        <NoElement />
+        <NoElement setCreateElement={setCreateElement} />
       </div>
+      <CreateElementModal
+        createElement={createElement}
+        setCreateElement={setCreateElement}
+      />
     </div>
   );
 };

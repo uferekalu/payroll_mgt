@@ -4,19 +4,30 @@ interface IButton {
   btnClassName: string;
   btnText: string;
   type: 'button' | 'submit' | 'reset' | undefined;
-  spanClassName: string
+  spanClassName?: string;
+  onClick: () => void;
+  spanText?: string;
+  disabled?: boolean;
 }
 
 const Button: React.FC<IButton> = ({
   btnClassName,
   btnText,
   type,
-  spanClassName
+  spanClassName,
+  onClick,
+  spanText,
+  disabled,
 }) => {
   return (
-    <button type={type} className={btnClassName}>
+    <button
+      type={type}
+      className={btnClassName}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {btnText}
-      <span className={spanClassName}>+</span>
+      <span className={spanClassName}>{spanText}</span>
     </button>
   );
 };

@@ -6,9 +6,11 @@ import Button from '../button/Button';
 import ellipse from '../../images/element-ellipse.png';
 import warning from '../../images/warning.png';
 
-interface INoElement {}
+interface INoElement {
+  setCreateElement: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const NoElement: React.FC<INoElement> = () => {
+const NoElement: React.FC<INoElement> = ({ setCreateElement }) => {
   return (
     <div className={classes.noelement}>
       <h3 className={classes.noelement__heading}>Elements</h3>
@@ -26,6 +28,8 @@ const NoElement: React.FC<INoElement> = () => {
           type="submit"
           btnText={`Create Element`}
           spanClassName={classes.noelement__searchbar__btnholder__text__span}
+          onClick={() => setCreateElement(true)}
+          spanText={"+"}
         />
       </div>
       <div className={classes.noelement__warningContainer}>

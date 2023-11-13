@@ -1,0 +1,47 @@
+@import '../../styles/variables.scss';
+
+.successmodal {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  // width: 100%;
+
+  &__iconholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__img {
+      // display: flex;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__successmsg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: $successTxt;
+    font-weight: 500;
+    margin-top: 13px;
+  }
+
+  &__btnholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 13px;
+    width: 100%;
+
+    &__btn {
+      display: flex;
+      padding: 10px;
+      border-radius: $borderRadius;
+      background: $green;
+      border: none;
+      font-size: 10px;
+    }
+  }
+}
