@@ -2,6 +2,7 @@ import React from 'react';
 import GeneralModal from '../modal/GeneralModal';
 import classes from './SuccessModal.module.scss';
 import Button from '../button/Button';
+import { Modal } from 'react-bootstrap';
 
 interface ISuccessModal {
   successModal: boolean;
@@ -31,22 +32,24 @@ const SuccessModal: React.FC<ISuccessModal> = ({
       }}
       className={classes.successmodal}
     >
-      <div className={classes.successModal__iconholder}>
+      <Modal.Body className={classes.successmodal__body}>
         <img
           src={imgSrc}
           alt={alt}
-          className={classes.successModal__iconholder__img}
+          className={classes.successmodal__body__imgicon}
         />
-      </div>
-      <span className={classes.successmodal__successmsg}>{successMsg}</span>
-      <div className={classes.successModal__btnholder}>
-        <Button
-          type="submit"
-          btnClassName={classes.successModal__btnholder__btn}
-          btnText={btnText}
-          onClick={onClick}
-        />
-      </div>
+        <span className={classes.successmodal__body__successmsg}>
+          {successMsg}
+        </span>
+        <div className={classes.successmodal__body__btnholder}>
+          <Button
+            type="submit"
+            btnClassName={classes.successmodal__body__btnholder__btn}
+            btnText={btnText}
+            onClick={onClick}
+          />
+        </div>
+      </Modal.Body>
     </GeneralModal>
   );
 };
