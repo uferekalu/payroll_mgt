@@ -25,9 +25,11 @@ const months = [
   'Dec',
 ];
 
-interface INextStep {}
+interface INextStep {
+  setNextStep: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const CreateElementNextStep: React.FC<INextStep> = () => {
+const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
   const [isStartDatePickerOpen, setStartDatePickerOpen] =
@@ -499,7 +501,7 @@ const CreateElementNextStep: React.FC<INextStep> = () => {
           <Button
             type="reset"
             btnClassName={classes.createElement__btnaction__cancel}
-            onClick={() => {}}
+            onClick={() => setNextStep(false)}
             btnText="Back"
           />
           <Button

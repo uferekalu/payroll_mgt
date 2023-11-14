@@ -39,7 +39,7 @@ const Elements: React.FC<IElements> = ({
   handleOpenSwitchModule,
 }) => {
   const [showMobileSidebar, setShowMobileSidebar] = useState<boolean>(false);
-  const [createElement, setCreateElement] = useState<boolean>(false)
+  const [createElement, setCreateElement] = useState<boolean>(false);
 
   const toggleMobileShowSidebar = () => {
     setShowMobileSidebar((prevState) => !prevState);
@@ -49,9 +49,20 @@ const Elements: React.FC<IElements> = ({
     <div className={classes.elements}>
       <div className={classes.elements__showsidebar}>
         {showMobileSidebar ? (
-          <AiOutlineClose onClick={toggleMobileShowSidebar} />
+          <AiOutlineClose
+            style={{
+              cursor: 'pointer',
+            }}
+            onClick={toggleMobileShowSidebar}
+          />
         ) : (
-          <i className="bi bi-list" onClick={toggleMobileShowSidebar}></i>
+          <i
+            style={{
+              cursor: 'pointer',
+            }}
+            className="bi bi-list"
+            onClick={toggleMobileShowSidebar}
+          ></i>
         )}
       </div>
 
