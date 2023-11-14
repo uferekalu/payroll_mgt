@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.popup {
+  display: block;
+  position: absolute;
+  border-radius: $borderRadius;
+  box-shadow: 0 0 10px rgba(132, 126, 126, 0.5);
+  box-sizing: border-box;
+  padding: 10px;
+  top: 50;
+  right: 0;
+}
