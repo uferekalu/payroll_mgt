@@ -183,7 +183,6 @@ const ElementTable: React.FC<IElementTb> = () => {
               <thead
                 style={{
                   height: '40px',
-                  // width: '100%',
                 }}
               >
                 <tr>
@@ -323,7 +322,6 @@ const ElementTable: React.FC<IElementTb> = () => {
                         >
                           <img
                             ref={imgRef}
-                            // onClick={handleTogglePopup}
                             style={{
                               cursor: 'pointer',
                             }}
@@ -337,8 +335,6 @@ const ElementTable: React.FC<IElementTb> = () => {
                 ))}
               </tbody>
             </Table>
-
-            {/* Render any additional components or controls you need */}
           </div>
         )}
       />
