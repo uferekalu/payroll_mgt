@@ -18,15 +18,12 @@ const Select: React.FC<ISelect> = ({
   return (
     <select className={classname} disabled={disabled} onChange={onChange}>
       <option value="">{defaultText}</option>
-      {Array.isArray(text) ? (
+      {Array.isArray(text) &&
         text.map((txt, idx) => (
           <option key={idx} value={txt}>
             {txt}
           </option>
-        ))
-      ) : (
-        <option>{text}</option>
-      )}
+        ))}
     </select>
   );
 };

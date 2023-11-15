@@ -95,6 +95,7 @@ const CreateElementModal: React.FC<ICreateElement> = ({
                       classes.createElement__info__sectionone__categoryholder__selectcategory
                     }
                     text="Select Element Category"
+                    defaultText='Select Element Category'
                   />
                 </div>
               </div>
@@ -116,6 +117,7 @@ const CreateElementModal: React.FC<ICreateElement> = ({
                       classes.createElement__info__sectiontwo__classificationholder__selectclassification
                     }
                     text="Select Classification"
+                    defaultText='Select Classification'
                   />
                 </div>
                 <div
@@ -135,6 +137,7 @@ const CreateElementModal: React.FC<ICreateElement> = ({
                       classes.createElement__info__sectiontwo__payrunholder__selectpayrun
                     }
                     text="Select Payrun"
+                    defaultText='Select Payrun'
                   />
                 </div>
               </div>

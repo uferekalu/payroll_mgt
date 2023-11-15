@@ -1,0 +1,668 @@
+@import '../../styles/variables.scss';
+
+.createElementLink {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__body {
+    display: 'flex';
+    flex-direction: column;
+
+    @media (min-width: 560px) {
+      padding: 10px;
+    }
+  }
+  &__heading {
+    font-size: 12px;
+    color: $darkText;
+    font-weight: 600;
+
+    @media (min-width: 560px) {
+      font-size: 13px;
+    }
+  }
+
+  &__step__holder {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 30px;
+
+    &__imgone {
+      width: 100%;
+      height: auto;
+      max-width: 100vw;
+    }
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 12px;
+
+    &__text {
+      font-size: 12px;
+      color: $textColor;
+      @media (max-width: 560px) {
+        font-size: 14px;
+      }
+    }
+
+    &__input {
+      padding: 13px;
+      border-radius: $borderRadius;
+      font-size: 12px;
+      border: 1px solid $inputBorderColor;
+      margin-top: 8px;
+      &::placeholder {
+        color: $textColor;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &__subdept {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    @media (min-width: 560px) {
+      justify-content: space-between;
+
+      &__sub {
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+        &__text {
+          font-size: 12px;
+          color: $textColor;
+        }
+
+        &__select {
+          padding: 13px;
+          border-radius: $borderRadius;
+          font-size: 12px;
+          border: 1px solid $inputBorderColor;
+          margin-top: 5px;
+          color: $textColor;
+
+          &::placeholder {
+            font-size: 12px;
+            color: $darkText;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      &__dept {
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+        &__text {
+          font-size: 12px;
+          color: $textColor;
+        }
+
+        &__select {
+          padding: 13px;
+          border-radius: $borderRadius;
+          font-size: 12px;
+          border: 1px solid $inputBorderColor;
+          margin-top: 5px;
+          color: $textColor;
+
+          &::placeholder {
+            font-size: 12px;
+            color: $darkText;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+    @media (max-width: 560px) {
+      flex-direction: column;
+      gap: 10px;
+
+      &__sub {
+        width: 100%;
+        &__text {
+          font-size: 13px;
+          color: $textColor;
+        }
+
+        &__select {
+          padding: 13px;
+          border-radius: $borderRadius;
+          font-size: 12px;
+          border: 1px solid $inputBorderColor;
+          margin-top: 5px;
+          color: $textColor;
+          width: 100%;
+
+          &::placeholder {
+            font-size: 12px;
+            color: $darkText;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      &__dept {
+        width: 100%;
+        &__text {
+          font-size: 13px;
+          color: $textColor;
+        }
+
+        &__select {
+          padding: 13px;
+          border-radius: $borderRadius;
+          font-size: 12px;
+          border: 1px solid $inputBorderColor;
+          margin-top: 5px;
+          color: $textColor;
+          width: 100%;
+
+          &::placeholder {
+            font-size: 12px;
+            color: $darkText;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+  &__jobloc {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+
+    @media (min-width: 560px) {
+      justify-content: space-between;
+    }
+    @media (max-width: 560px) {
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    &__job {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 560px) {
+        width: 48%;
+      }
+      &__text {
+        font-size: 12px;
+        color: $textColor;
+        @media (max-width: 560px) {
+          font-size: 13px;
+        }
+      }
+
+      &__select {
+        padding: 13px;
+        border-radius: $borderRadius;
+        font-size: 12px;
+        border: 1px solid $inputBorderColor;
+        margin-top: 5px;
+        color: $textColor;
+        width: 100%;
+
+        &::placeholder {
+          font-size: 12px;
+          color: $darkText;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    &__loc {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 560px) {
+        width: 48%;
+      }
+      &__text {
+        font-size: 12px;
+        color: $textColor;
+        @media (max-width: 560px) {
+          font-size: 13px;
+        }
+      }
+
+      &__select {
+        padding: 13px;
+        border-radius: $borderRadius;
+        font-size: 12px;
+        border: 1px solid $inputBorderColor;
+        margin-top: 5px;
+        color: $textColor;
+        width: 100%;
+
+        &::placeholder {
+          font-size: 12px;
+          color: $darkText;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+  &__employeetypecat {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+
+    @media (min-width: 560px) {
+      justify-content: space-between;
+    }
+    @media (max-width: 560px) {
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    &__type {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 560px) {
+        width: 48%;
+      }
+      &__text {
+        font-size: 12px;
+        color: $textColor;
+        @media (max-width: 560px) {
+          font-size: 13px;
+        }
+      }
+
+      &__select {
+        padding: 13px;
+        border-radius: $borderRadius;
+        font-size: 12px;
+        border: 1px solid $inputBorderColor;
+        margin-top: 5px;
+        color: $textColor;
+        width: 100%;
+
+        &::placeholder {
+          font-size: 12px;
+          color: $darkText;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    &__cat {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 560px) {
+        width: 48%;
+      }
+      &__text {
+        font-size: 12px;
+        color: $textColor;
+        @media (max-width: 560px) {
+          font-size: 13px;
+        }
+      }
+
+      &__select {
+        padding: 13px;
+        border-radius: $borderRadius;
+        font-size: 12px;
+        border: 1px solid $inputBorderColor;
+        margin-top: 5px;
+        color: $textColor;
+        width: 100%;
+
+        &::placeholder {
+          font-size: 12px;
+          color: $darkText;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  &__btnaction {
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+
+    @media (min-width: 560px) {
+      justify-content: space-between;
+    }
+
+    @media (max-width: 560px) {
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    &__cancel {
+      border-radius: $borderRadius;
+      background: transparent;
+      border: 2px solid $green;
+      font-size: 12px;
+      color: $green;
+      font-weight: 500;
+
+      @media (min-width: 560px) {
+        width: 48%;
+        padding: 10px;
+      }
+
+      @media (max-width: 560px) {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+
+    &__next {
+      border-radius: $borderRadius;
+      background: #93ccaf;
+      border: 2px solid $green;
+      font-size: 12px;
+      color: $light;
+      font-weight: 500;
+      border: none;
+
+      @media (min-width: 560px) {
+        width: 48%;
+        padding: 10px;
+      }
+
+      @media (max-width: 560px) {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+  }
+
+  &__secondstep {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &__gradestep {
+      display: flex;
+      margin-top: 10px;
+      width: 100%;
+
+      @media (min-width: 560px) {
+        justify-content: space-between;
+      }
+      @media (max-width: 560px) {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+
+      &__grade {
+        display: flex;
+        flex-direction: column;
+        @media (min-width: 560px) {
+          width: 48%;
+        }
+        &__text {
+          font-size: 12px;
+          color: $textColor;
+          @media (max-width: 560px) {
+            font-size: 13px;
+          }
+        }
+
+        &__select {
+          padding: 13px;
+          border-radius: $borderRadius;
+          font-size: 12px;
+          border: 1px solid $inputBorderColor;
+          margin-top: 5px;
+          color: $textColor;
+          width: 100%;
+
+          &::placeholder {
+            font-size: 12px;
+            color: $darkText;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      &__gradestep {
+        display: flex;
+        flex-direction: column;
+        @media (min-width: 560px) {
+          width: 48%;
+        }
+        &__text {
+          font-size: 12px;
+          color: $textColor;
+          @media (max-width: 560px) {
+            font-size: 13px;
+          }
+        }
+
+        &__select {
+          padding: 13px;
+          border-radius: $borderRadius;
+          font-size: 12px;
+          border: 1px solid $inputBorderColor;
+          margin-top: 5px;
+          color: $textColor;
+          width: 100%;
+
+          &::placeholder {
+            font-size: 12px;
+            color: $darkText;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+
+    &__union {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 10px;
+
+      &__text {
+        font-size: 12px;
+        color: $textColor;
+      }
+
+      &__select {
+        padding: 13px;
+        border-radius: $borderRadius;
+        font-size: 12px;
+        border: 1px solid $inputBorderColor;
+        margin-top: 5px;
+        color: $textColor;
+        width: 100%;
+
+        &::placeholder {
+          font-size: 12px;
+          color: $darkText;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    &__additionalinfo {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $inputBorderColor;
+      height: auto;
+      border-radius: $borderRadius;
+
+      &__text {
+        font-size: 14px;
+        color: #2d416f;
+        font-weight: 500;
+
+        @media (max-width: 560px) {
+          font-size: 13px;
+        }
+      }
+      &__text2 {
+        font-size: 12px;
+        color: #2d416f;
+      }
+
+      &__pensionhouse {
+        display: flex;
+        // margin-top: 10px;
+        width: 100%;
+
+        @media (min-width: 560px) {
+          justify-content: space-between;
+        }
+        @media (max-width: 560px) {
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+        }
+
+        &__pension {
+          display: flex;
+          flex-direction: column;
+          @media (min-width: 560px) {
+            width: 48%;
+          }
+          &__text {
+            font-size: 12px;
+            color: $textColor;
+            @media (max-width: 560px) {
+              font-size: 13px;
+            }
+          }
+
+          &__select {
+            padding: 13px;
+            border-radius: $borderRadius;
+            font-size: 12px;
+            border: 1px solid $inputBorderColor;
+            margin-top: 5px;
+            color: $textColor;
+            width: 100%;
+
+            &::placeholder {
+              font-size: 12px;
+              color: $darkText;
+            }
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+
+        &__housing {
+          display: flex;
+          flex-direction: column;
+          @media (min-width: 560px) {
+            width: 48%;
+          }
+          &__text {
+            font-size: 12px;
+            color: $textColor;
+            @media (max-width: 560px) {
+              font-size: 13px;
+            }
+          }
+
+          &__select {
+            padding: 13px;
+            border-radius: $borderRadius;
+            font-size: 12px;
+            border: 1px solid $inputBorderColor;
+            margin-top: 5px;
+            color: $textColor;
+            width: 100%;
+
+            &::placeholder {
+              font-size: 12px;
+              color: $darkText;
+            }
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+
+      &__loyaltybonus {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        @media (min-width: 560px) {
+          width: 50%;
+        }
+
+        &__text {
+          font-size: 12px;
+          color: $textColor;
+        }
+
+        &__select {
+          padding: 13px;
+          border-radius: $borderRadius;
+          font-size: 12px;
+          border: 1px solid $inputBorderColor;
+          margin-top: 5px;
+          color: $textColor;
+          width: 100%;
+
+          &::placeholder {
+            font-size: 12px;
+            color: $darkText;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
