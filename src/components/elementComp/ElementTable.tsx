@@ -2,13 +2,17 @@ import React, { useRef, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import sortIcon from '../../images/sort.png';
 import eyeIcon from '../../images/eye.png';
-import deleteIcon from '../../images/delete.png';
+import deleteIcon from '../../images/deleteicon.png';
 import editIcon from '../../images/edit.png';
 import actionIcon from '../../images/actionicon.png';
+import check2 from '../../images/check2.png';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import classes from './ElementComp.module.scss';
 import Pagination from '../pagination/Pagination';
+import { useNavigate } from 'react-router-dom';
+import DeleteModalComp from '../deleteModalComp/DeleteModalComp';
+import SuccessModal from '../successModl/SuccessModal';
 
 const popoverData = ['View Element Links', 'Edit Element', 'Delete Element'];
 
@@ -137,8 +141,16 @@ interface IElementTb {}
 
 const ElementTable: React.FC<IElementTb> = () => {
   const imgRef = useRef<HTMLImageElement>(null);
+  const naviagte = useNavigate();
   const [noOfItems, setNoOfItems] = useState<number>(5);
   const [outOfRange, setOutOfRange] = useState<boolean>(false);
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [successfulRemoval, setSuccessfulRemoval] = useState<boolean>(false);
+
+  const handleSuccessfulRemoval = () => {
+    setSuccessfulRemoval(true);
+    setDeleteModal(false);
+  };
 
   const handleNoOfItems = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (Number(e.target.value) > data.length) {
@@ -269,6 +281,16 @@ const ElementTable: React.FC<IElementTb> = () => {
                                 <span className={classes.popover}>
                                   {popoverData.map((pop, idx) => (
                                     <span
+                                      style={{
+                                        textDecoration: 'none',
+                                      }}
+                                      onClick={
+                                        pop === 'View Element Links'
+                                          ? () => naviagte('/element-links')
+                                          : pop === 'Delete Element'
+                                          ? () => setDeleteModal(true)
+                                          : undefined
+                                      }
                                       key={idx}
                                       className={classes.popover__container}
                                     >
@@ -319,6 +341,27 @@ const ElementTable: React.FC<IElementTb> = () => {
             {/* Render any additional components or controls you need */}
           </div>
         )}
+      />
+      <DeleteModalComp
+        deleteModal={deleteModal}
+        setDeleteModal={setDeleteModal}
+        imgSrc={deleteIcon}
+        alt="delte"
+        deleteMsg1={'Are you sure you want to delete Element?'}
+        deleteMsg2={'You can’t reverse this action'}
+        onClick1={() => setDeleteModal(false)}
+        onClick2={() => handleSuccessfulRemoval()}
+        btnText1="Cancel"
+        btnText2="Yes, Delete"
+      />
+      <SuccessModal
+        successModal={successfulRemoval}
+        setSuccessModal={setSuccessfulRemoval}
+        imgSrc={check2}
+        alt="Success"
+        onClick={() => setSuccessfulRemoval(false)}
+        successMsg={'Element has been deleted successfully'}
+        btnText={'Close to continue'}
       />
     </>
   );

@@ -10,7 +10,7 @@ function App() {
     'Payroll Management',
   );
   const [payrollActivities, setPayrollActivities] = useState<boolean>(false);
-  const [elementSetup, setElementSetup] = useState<boolean>(false);
+  const [elementSetup, setElementSetup] = useState<boolean>(true);
 
   const toggleElementSetup = () => {
     setElementSetup((prevState) => !prevState);
@@ -71,7 +71,25 @@ function App() {
             />
           }
         />
-        <Route path="/element-links" element={<ElementLinks />} />
+        <Route
+          path="/element-links"
+          element={
+            <ElementLinks
+              openSwitchModule={openSwitchModule}
+              setOpenSwitchModule={setOpenSwitchModule}
+              selectedModule={selectedModule}
+              setSelectedModule={setSelectedModule}
+              payrollActivities={payrollActivities}
+              setPayrollActivities={setPayrollActivities}
+              elementSetup={elementSetup}
+              setElementSetup={setElementSetup}
+              toggleElementSetup={toggleElementSetup}
+              togglePayrollActivities={togglePayrollActivities}
+              handleSelectedModule={handleSelectedModule}
+              handleOpenSwitchModule={handleOpenSwitchModule}
+            />
+          }
+        />
       </Routes>
     </Layout>
   );
