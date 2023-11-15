@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './ElementDetail.module.scss';
 import arrowLeft from '../../images/arrowleft.png';
+import check from '../../images/check.png';
 import { Table } from 'react-bootstrap';
 import SearchBar from '../header/search/SearchBar';
 import Button from '../button/Button';
@@ -9,12 +10,18 @@ import filterBtn from '../../images/filterbtn.png';
 import ellipse from '../../images/element-ellipse.png';
 import warning from '../../images/warning.png';
 import CreateElementLinksModal from '../createElementLinksModal.tsx/CreateElementLinksModal';
+import SuccessModal from '../successModl/SuccessModal';
 
 interface IElementDetail {}
 
 const ElementDetail: React.FC<IElementDetail> = () => {
   const navigate = useNavigate();
-  const [createElementLink, setCreateElementLink] = useState<boolean>(false)
+  const [createElementLink, setCreateElementLink] = useState<boolean>(false);
+  const [openSuccessModal, setOpenSuccessModal] = useState<boolean>(false);
+
+  const closeSuccessModal = () => {
+    setOpenSuccessModal(false);
+  };
 
   return (
     <>
@@ -223,6 +230,16 @@ const ElementDetail: React.FC<IElementDetail> = () => {
       <CreateElementLinksModal
         createElementLink={createElementLink}
         setCreateElementLink={setCreateElementLink}
+        setOpenSuccessModal={setOpenSuccessModal}
+      />
+      <SuccessModal
+        successModal={openSuccessModal}
+        setSuccessModal={setOpenSuccessModal}
+        imgSrc={check}
+        alt={'success'}
+        successMsg={`Element Link has been created successfully`}
+        btnText={'Close to continue'}
+        onClick={() => closeSuccessModal()}
       />
     </>
   );

@@ -4,6 +4,7 @@ import GeneralModal from '../modal/GeneralModal';
 import { Modal } from 'react-bootstrap';
 import createLink1 from '../../images/createLink1.png';
 import createLink2 from '../../images/createLink2.png';
+import createLink3 from '../../images/createLink3.png';
 import Input from '../input/Input';
 import Select from '../select/Select';
 import Button from '../button/Button';
@@ -12,17 +13,28 @@ import CreateElementModalSecondStep from './CreateElementModalSecondStep';
 interface ICreateElementLinks {
   createElementLink: boolean;
   setCreateElementLink: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CreateElementLinksModal: React.FC<ICreateElementLinks> = ({
   createElementLink,
   setCreateElementLink,
+  setOpenSuccessModal
 }) => {
   const [secondStep, setSecondStep] = useState<boolean>(false);
+  const [thirdStep, setThirdStep] = useState<boolean>(false);
+
+  const handleThirdStep = () => {
+    setThirdStep(true);
+  };
 
   const handleSecondStep = () => {
     setSecondStep(true);
   };
+
+  const handleCancel = () => {
+    setCreateElementLink(false)
+  }
   return (
     <GeneralModal
       size="lg"
@@ -37,7 +49,13 @@ const CreateElementLinksModal: React.FC<ICreateElementLinks> = ({
           Create Element Link
         </h3>
         <div className={classes.createElementLink__step__holder}>
-          {secondStep ? (
+          {thirdStep ? (
+            <img
+              src={createLink3}
+              className={classes.createElementLink__step__holder__imgone}
+              alt="step three"
+            />
+          ) : secondStep ? (
             <img
               src={createLink2}
               className={classes.createElementLink__step__holder__imgone}
@@ -52,7 +70,14 @@ const CreateElementLinksModal: React.FC<ICreateElementLinks> = ({
           )}
         </div>
         {secondStep ? (
-          <CreateElementModalSecondStep />
+          <CreateElementModalSecondStep
+            thirdStep={thirdStep}
+            handleThirdStep={handleThirdStep}
+            setSecondStep={setSecondStep}
+            setThirdStep={setThirdStep}
+            setOpenSuccessModal={setOpenSuccessModal}
+            setCreateElementLink={setCreateElementLink}
+          />
         ) : (
           <>
             <div className={classes.createElementLink__name}>
@@ -147,7 +172,7 @@ const CreateElementLinksModal: React.FC<ICreateElementLinks> = ({
               <Button
                 type="reset"
                 btnClassName={classes.createElementLink__btnaction__cancel}
-                onClick={() => {}}
+                onClick={() => handleCancel()}
                 btnText="Cancel"
               />
               <Button

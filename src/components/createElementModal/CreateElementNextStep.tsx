@@ -509,7 +509,6 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
             btnClassName={classes.createElement__btnaction__next}
             onClick={() => handleCreateElement()}
             btnText="Create New Element"
-            // disabled
           />
         </div>
       </div>
