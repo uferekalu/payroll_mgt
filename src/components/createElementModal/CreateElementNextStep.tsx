@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import classes from './CreateElementModal.module.scss';
 import calenderIcon from '../../images/calenderIcon.png';
-import toggleBtn from '../../images/toggle-button.png';
-import check from '../../images/check.png';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import Input from '../input/Input';
 import Select from '../select/Select';
 import Button from '../button/Button';
-import SuccessModal from '../successModl/SuccessModal';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { createElement } from '../../slices/createElementSlice';
+import { RootState } from '../../store';
 
 const months = [
   'Jan',
@@ -26,26 +26,159 @@ const months = [
 ];
 
 interface INextStep {
+  lookUpValueIds: {
+    payRunValueId: string;
+    classificationValueId: string;
+    categoryValueId: string;
+  };
   setNextStep: React.Dispatch<React.SetStateAction<boolean>>;
+  setCreateElementSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  setCreateElement: React.Dispatch<React.SetStateAction<boolean>>;
+  errors: {
+    name: string;
+    elementCategory: string;
+    elementClassification: string;
+    payrun: string;
+    description: string;
+    reportingName: string;
+    effectiveStartDate: string;
+    effectiveEndDate: string;
+    processingType: string;
+    payFrequency: string;
+    selectedPayMonths: string;
+    prorate: string;
+  };
+  setErrors: React.Dispatch<
+    React.SetStateAction<{
+      name: string;
+      elementCategory: string;
+      elementClassification: string;
+      payrun: string;
+      description: string;
+      reportingName: string;
+      effectiveStartDate: string;
+      effectiveEndDate: string;
+      processingType: string;
+      payFrequency: string;
+      selectedPayMonths: string;
+      prorate: string;
+    }>
+  >;
+  stepTwoFormData: {
+    effectiveStartDate: Date | null;
+    effectiveEndDate: Date | null;
+    processingType: string;
+    payFrequency: string;
+    selectedPayMonths: string[];
+    prorate: string;
+    status: boolean;
+  };
+  setStepTwoFormData: React.Dispatch<
+    React.SetStateAction<{
+      effectiveStartDate: Date | null;
+      effectiveEndDate: Date | null;
+      processingType: string;
+      payFrequency: string;
+      selectedPayMonths: string[];
+      prorate: string;
+      status: boolean;
+    }>
+  >;
+  selectedStartDate: Date | null;
+  setSelectedStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  selectedEndDate: Date | null;
+  setSelectedEndDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  processingType: string;
+  setProcessingType: React.Dispatch<React.SetStateAction<string>>;
+  monthlySelectedMonths: string;
+  setMonthlySelectedMonths: React.Dispatch<React.SetStateAction<string>>;
+  selectedMonths: string[];
+  setSelectedMonths: React.Dispatch<React.SetStateAction<string[]>>;
+  prorate: string;
+  setProrate: React.Dispatch<React.SetStateAction<string>>;
+  stepOneFormData: {
+    name: string;
+    elementCategory: string;
+    elementClassification: string;
+    payrun: string;
+    description: string;
+    reportingName: string;
+  };
+  setStepOneFormData: React.Dispatch<
+    React.SetStateAction<{
+      name: string;
+      elementCategory: string;
+      elementClassification: string;
+      payrun: string;
+      description: string;
+      reportingName: string;
+    }>
+  >;
 }
 
-const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
-  const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
-  const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
+const CreateElementNextStep: React.FC<INextStep> = ({
+  setNextStep,
+  setCreateElementSuccess,
+  setCreateElement,
+  stepTwoFormData,
+  setStepTwoFormData,
+  errors,
+  setErrors,
+  selectedStartDate,
+  setSelectedStartDate,
+  selectedEndDate,
+  setSelectedEndDate,
+  processingType,
+  setProcessingType,
+  monthlySelectedMonths,
+  setMonthlySelectedMonths,
+  selectedMonths,
+  setSelectedMonths,
+  prorate,
+  setProrate,
+  setStepOneFormData,
+  stepOneFormData,
+  lookUpValueIds,
+}) => {
   const [isStartDatePickerOpen, setStartDatePickerOpen] =
     useState<boolean>(false);
   const [isEndDatePickerOpen, setEndDatePickerOpen] = useState<boolean>(false);
-  const [processingType, setProcessingType] = useState<string>('');
-  const [monthlySelectedMonths, setMonthlySelectedMonths] =
-    useState<string>('');
 
-  const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
-  const [prorate, setProrate] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const createdElement = useAppSelector(
+    (state: RootState) => state.createElement,
+  );
 
-  const [createElement, setCreateElement] = useState<boolean>(false);
+  useEffect(() => {
+    if (createdElement.createElementStatus === 'success') {
+      setCreateElementSuccess(true);
+    }
+  }, [createdElement.createElementStatus, setCreateElementSuccess]);
+
 
   const handleProrate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProrate(e.target.value);
+  };
+
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+
+    if (name === 'status') {
+      setStepTwoFormData({
+        ...stepTwoFormData,
+        [name]: !stepTwoFormData.status,
+      });
+    } else {
+      setStepTwoFormData({
+        ...stepTwoFormData,
+        [name]: value,
+      });
+    }
   };
 
   const removeMonth = (data: string) => {
@@ -84,12 +217,36 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
     setEndDatePickerOpen(!isEndDatePickerOpen);
   };
 
-  const handleCreateElement = () => {
-    setCreateElement(true);
+  const handleCreateElement = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      data: {
+        name: stepOneFormData.name,
+        description: stepOneFormData.description,
+        payRunId: Number(stepOneFormData.payrun),
+        payRunValueId: Number(lookUpValueIds.payRunValueId),
+        classificationId: Number(stepOneFormData.elementClassification),
+        classificationValueId: Number(lookUpValueIds.classificationValueId),
+        categoryId: Number(stepOneFormData.elementCategory),
+        categoryValueId: Number(lookUpValueIds.categoryValueId),
+        reportingName: stepOneFormData.reportingName,
+        processingType: processingType,
+        status: stepTwoFormData.status ? 'Active' : 'Inactive',
+        prorate: prorate,
+        effectiveStartDate:
+          selectedStartDate && selectedStartDate?.toISOString(),
+        effectiveEndDate: selectedEndDate && selectedEndDate?.toISOString(),
+        selectedMonths,
+        payFrequency: monthlySelectedMonths,
+        modifiedBy: 'Kalu Ufere',
+      },
+    };
+    await dispatch(createElement(data));
+    setCreateElement(false);
   };
 
   return (
-    <>
+    <form onSubmit={handleCreateElement}>
       <div className={classes.createElement__nextstep}>
         <div className={classes.createElement__nextstep__datesection}>
           <div
@@ -128,7 +285,11 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
               }
               onClick={handleStartDateIconClick}
             />
-
+            {errors.effectiveStartDate && (
+              <span className={classes.createElement__nextstep__errors}>
+                {errors.effectiveStartDate}
+              </span>
+            )}
             <span
               className={
                 classes.createElement__nextstep__datesection__startdateprocessing__processing
@@ -186,6 +347,11 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
                 </span>
               </div>
             </div>
+            {errors.processingType && (
+              <span className={classes.createElement__nextstep__errors}>
+                {errors.processingType}
+              </span>
+            )}
           </div>
           <div
             className={
@@ -221,6 +387,11 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
               }
               onClick={handleEndDateIconClick}
             />
+            {errors.effectiveEndDate && (
+              <span className={classes.createElement__nextstep__errors}>
+                {errors.effectiveEndDate}
+              </span>
+            )}
             <span
               className={
                 classes.createElement__nextstep__datesection__enddatepayfrequency__payfrequency
@@ -278,6 +449,11 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
                 </span>
               </div>
             </div>
+            {errors.payFrequency && (
+              <span className={classes.createElement__nextstep__errors}>
+                {errors.payFrequency}
+              </span>
+            )}
           </div>
         </div>
         <div
@@ -401,6 +577,11 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
             </div>
           </div>
         </div>
+        {errors.selectedPayMonths && (
+          <span className={classes.createElement__nextstep__errors}>
+            {errors.selectedPayMonths}
+          </span>
+        )}
         <div className={classes.createElement__nextstep__lastsection}>
           <div className={classes.createElement__nextstep__lastsection__part1}>
             <span
@@ -460,7 +641,13 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
                 </span>
               </div>
             </div>
+            {errors.prorate && (
+              <span className={classes.createElement__nextstep__errors}>
+                {errors.prorate}
+              </span>
+            )}
           </div>
+
           <div className={classes.createElement__nextstep__lastsection__part2}>
             <span
               className={
@@ -479,19 +666,18 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
                   classes.createElement__nextstep__lastsection__part2__status__activeicon
                 }
               >
-                <img
-                  src={toggleBtn}
-                  alt="toggle"
-                  className={
-                    classes.createElement__nextstep__lastsection__part2__status__activeicon__btn
-                  }
+                <input
+                  type="checkbox"
+                  checked={stepTwoFormData.status}
+                  onChange={handleChange}
+                  name="status"
                 />
                 <span
                   className={
                     classes.createElement__nextstep__lastsection__part2__status__activeicon__text
                   }
                 >
-                  Active
+                  {stepTwoFormData.status ? 'Active' : 'Inactive'}
                 </span>
               </div>
             </div>
@@ -507,21 +693,12 @@ const CreateElementNextStep: React.FC<INextStep> = ({ setNextStep }) => {
           <Button
             type="submit"
             btnClassName={classes.createElement__btnaction__next}
-            onClick={() => handleCreateElement()}
+            onClick={() => {}}
             btnText="Create New Element"
           />
         </div>
       </div>
-      <SuccessModal
-        successModal={createElement}
-        setSuccessModal={setCreateElement}
-        imgSrc={check}
-        alt="Success"
-        onClick={() => setCreateElement(false)}
-        successMsg={'Element has been created successfully'}
-        btnText={'Close to continue'}
-      />
-    </>
+    </form>
   );
 };
 

@@ -11,6 +11,7 @@ const initialState: GetLookupValuesSlice = {
 
 export const getLookupValues = createAsyncThunk<
   LookupValueObject[],
+  number,
   { rejectValue: any }
 >('lookupvalues/getLookupValues', async (id, thunkAPI) => {
   try {
@@ -21,7 +22,7 @@ export const getLookupValues = createAsyncThunk<
   }
 });
 
-const getAllLookupValues = createSlice({
+const getLookupValuesSlice = createSlice({
   name: 'lookupvalues',
   initialState,
   reducers: {},
@@ -52,4 +53,4 @@ const getAllLookupValues = createSlice({
     });
   },
 });
-export default getAllLookupValues.reducer;
+export default getLookupValuesSlice.reducer;

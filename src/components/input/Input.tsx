@@ -9,6 +9,7 @@ interface IInput {
   checked?: boolean
   value?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  name?: string
 }
 
 const Input: React.FC<IInput> = ({
@@ -19,7 +20,8 @@ const Input: React.FC<IInput> = ({
   onBlur,
   checked,
   value,
-  onChange
+  onChange,
+  name
 }) => {
   return (
     <input
@@ -31,6 +33,7 @@ const Input: React.FC<IInput> = ({
       checked={checked}
       value={value}
       onChange={onChange}
+      name={name}
     />
   );
 };

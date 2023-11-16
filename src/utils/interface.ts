@@ -11,8 +11,8 @@ export interface AllElementsObject {
   processingType: string;
   status: string;
   prorate: string;
-  effectiveStartDate: string;
-  effectiveEndDate: string;
+  effectiveStartDate: string | null;
+  effectiveEndDate: string | null;
   selectedMonths: string[];
   payFrequency: string;
 }
@@ -153,7 +153,7 @@ export interface GetLookupByIdSlice {
 }
 
 export interface LookupValueObject {
-  id: number | null;
+  id: number;
   name: string;
   description: string;
   status: string;

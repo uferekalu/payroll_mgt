@@ -8,6 +8,7 @@ interface IButton {
   onClick: () => void;
   spanText?: string;
   disabled?: boolean;
+  style?: {background: string}
 }
 
 const Button: React.FC<IButton> = ({

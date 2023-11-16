@@ -11,7 +11,7 @@ import updateElementLinkReducer from '../slices/editElementLinkSlice';
 import deleteElementLinkReducer from '../slices/deleteElementLinkSlice';
 import allLookupsReducer from '../slices/getLookupsSlice';
 import getLookupByIdReducer from '../slices/getLookupByIdSlice';
-import getLookupValuesReducer from '../slices/getLookupValues';
+import getLookupValuesReducer from '../slices/getLookupValuesSlice';
 import getLookupValueByIdReducer from '../slices/getLookupValueByIdSlice';
 import allSuborganizationsReducer from '../slices/getSuborganizationsSlice';
 import getSuborganizationByIdReducer from '../slices/getSuborganizationByIdSlice';
