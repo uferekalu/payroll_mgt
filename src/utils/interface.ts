@@ -15,6 +15,7 @@ export interface AllElementsObject {
   effectiveEndDate: string | null;
   selectedMonths: string[];
   payFrequency: string;
+  modifiedBy?: string
 }
 
 export interface AllEments {

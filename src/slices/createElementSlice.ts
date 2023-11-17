@@ -34,6 +34,7 @@ export const createElement = createAsyncThunk<
       effectiveEndDate: data.effectiveEndDate,
       selectedMonths: data.selectedMonths,
       payFrequency: data.payFrequency,
+      modifiedBy: data.modifiedBy
     });
     console.log('created data', result.data);
     return 'Element has been created successfully';

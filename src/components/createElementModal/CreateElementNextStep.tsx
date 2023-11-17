@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './CreateElementModal.module.scss';
 import calenderIcon from '../../images/calenderIcon.png';
 import DatePicker from 'react-datepicker';
@@ -136,7 +136,6 @@ const CreateElementNextStep: React.FC<INextStep> = ({
   setSelectedMonths,
   prorate,
   setProrate,
-  setStepOneFormData,
   stepOneFormData,
   lookUpValueIds,
 }) => {
@@ -154,7 +153,6 @@ const CreateElementNextStep: React.FC<INextStep> = ({
       setCreateElementSuccess(true);
     }
   }, [createdElement.createElementStatus, setCreateElementSuccess]);
-
 
   const handleProrate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProrate(e.target.value);
